@@ -20,12 +20,13 @@ class WeatherFragment : Fragment() {
             binding.textView.text = it
         })
 
-        binding.sendRequest.setOnClickListener {
-            // Tokyo's location
-            viewModel.getWeatherResponse(35.6897, 139.6922)
-        }
+        binding.sendRequest.setOnClickListener { onSendRequest() }
 
         return binding.root
     }
 
+    private fun onSendRequest() {
+        // Tokyo's location
+        viewModel.getWeatherResponse(35.6897, 139.6922)
+    }
 }
