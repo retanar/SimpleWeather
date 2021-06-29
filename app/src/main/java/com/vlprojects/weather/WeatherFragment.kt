@@ -16,6 +16,15 @@ class WeatherFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedState: Bundle?): View {
         binding = WeatherFragmentBinding.inflate(inflater, container, false)
 
+        viewModel.responseString.observe(viewLifecycleOwner, {
+            binding.textView.text = it
+        })
+
+        binding.sendRequest.setOnClickListener {
+            // Tokyo's location
+            viewModel.getWeatherResponse(35.6897, 139.6922)
+        }
+
         return binding.root
     }
 
