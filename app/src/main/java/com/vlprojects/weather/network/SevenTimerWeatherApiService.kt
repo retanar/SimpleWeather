@@ -3,7 +3,6 @@ package com.vlprojects.weather.network
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -18,8 +17,8 @@ private val moshi = Moshi.Builder()
 
 // http client needed for custom timeout
 private val httpClient = OkHttpClient.Builder()
-    .connectTimeout(12, TimeUnit.SECONDS)
-    .readTimeout(12, TimeUnit.SECONDS)
+    .connectTimeout(30, TimeUnit.SECONDS)
+    .readTimeout(30, TimeUnit.SECONDS)
     .build()
 
 private val retrofit = Retrofit.Builder()
@@ -30,10 +29,10 @@ private val retrofit = Retrofit.Builder()
 
 interface SevenTimerWeatherApiService {
     @GET("api.pl?product=civil&output=json")
-    fun getCivilWeather(
+    suspend fun getCivilWeather(
         @Query("lat") latitude: Double,
         @Query("lon") longitude: Double,
-    ): Call<SevenTimerWeatherResponse>
+    ): SevenTimerWeatherResponse
 }
 
 object SevenTimerWeatherApi {

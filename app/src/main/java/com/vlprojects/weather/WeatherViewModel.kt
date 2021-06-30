@@ -4,12 +4,10 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.vlprojects.weather.network.SevenTimerWeatherApi
 import com.vlprojects.weather.network.SevenTimerWeatherData
-import com.vlprojects.weather.network.SevenTimerWeatherResponse
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.launch
 
 class WeatherViewModel : ViewModel() {
     private val weatherData = MutableLiveData<SevenTimerWeatherData?>(null)
@@ -22,20 +20,18 @@ class WeatherViewModel : ViewModel() {
     fun sendWeatherRequest(latitude: Double, longitude: Double) {
         responseStatus.value = "Loading..."
 
-        SevenTimerWeatherApi.service.getCivilWeather(latitude, longitude).enqueue(object : Callback<SevenTimerWeatherResponse> {
-            override fun onResponse(call: Call<SevenTimerWeatherResponse>, response: Response<SevenTimerWeatherResponse>) {
-                val resp = response.body()
+        viewModelScope.launch {
+            try {
+                val resp = SevenTimerWeatherApi.service.getCivilWeather(latitude, longitude)
 
-                weatherData.value = resp?.dataSeries?.get(0)
-                responseStatus.value = resp?.init
+                weatherData.value = resp.dataSeries[0]
+                responseStatus.value = resp.init
 
-                Log.d("WeatherViewModel", resp?.init ?: "empty response")
+                Log.d("WeatherViewModel", resp.init)
+            } catch (e: Exception) {
+                responseStatus.value = "Failed to load the data: " + e.message
+                Log.d("WeatherViewModel", e.stackTraceToString())
             }
-
-            override fun onFailure(call: Call<SevenTimerWeatherResponse>, t: Throwable) {
-                responseStatus.value = "Failed: " + t.message
-                Log.d("WeatherViewModel", t.stackTraceToString())
-            }
-        })
+        }
     }
 }
