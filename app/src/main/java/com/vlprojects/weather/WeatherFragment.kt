@@ -16,17 +16,29 @@ class WeatherFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedState: Bundle?): View {
         binding = WeatherFragmentBinding.inflate(inflater, container, false)
 
-        viewModel.responseString.observe(viewLifecycleOwner, {
-            binding.textView.text = it
-        })
-
+        setObservers()
         binding.sendRequest.setOnClickListener { onSendRequest() }
 
         return binding.root
     }
 
     private fun onSendRequest() {
-        // Tokyo's location
-        viewModel.getWeatherResponse(35.6897, 139.6922)
+        // Stein bei Nurnberg's location
+        viewModel.sendWeatherRequest(49.4167, 11.0167)
+    }
+
+    private fun setObservers() {
+        viewModel.timepointHour.observe(viewLifecycleOwner) { timepoint ->
+            binding.timepointValue.text = timepoint?.toString() ?: "none"
+        }
+        viewModel.temperature.observe(viewLifecycleOwner) { temp ->
+            binding.temperatureValue.text = temp?.toString() ?: "none"
+        }
+        viewModel.weatherType.observe(viewLifecycleOwner) { type ->
+            binding.weatherTypeValue.text = type ?: "none"
+        }
+        viewModel.responseStatus.observe(viewLifecycleOwner) { status ->
+            binding.statusValue.text = status
+        }
     }
 }

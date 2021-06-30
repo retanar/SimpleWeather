@@ -10,7 +10,8 @@ data class SevenTimerWeatherResponse(
 )
 
 data class SevenTimerWeatherData(
-    val timepoint: Int,
+    @Json(name = "timepoint")
+    val timepointHour: Int,
     @Json(name = "cloudcover")
     val cloudCover: Int,
     @Json(name = "prec_type")
@@ -21,5 +22,6 @@ data class SevenTimerWeatherData(
     val temp: Int,
     @Json(name = "rh2m")
     val humidity: String,
-    val weather: String,
+    @Json(name = "weather")
+    val weatherType: String,
 )
