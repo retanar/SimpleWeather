@@ -23,20 +23,20 @@ class WeatherViewModel : ViewModel() {
     val temperature = Transformations.map(weatherData) { it?.temp }
     val weatherType = Transformations.map(weatherData) { it?.weatherType }
 
-    val responseStatus = MutableLiveData<String>("")
+    val responseStatus = MutableLiveData(ResponseStatus.DEFAULT)
 
     fun sendWeatherRequest(latitude: Double, longitude: Double) {
-        responseStatus.value = "Loading..."
+        responseStatus.value = ResponseStatus.LOADING
 
         viewModelScope.launch {
             try {
                 val resp = SevenTimerWeatherApi.service.getCivilWeather(latitude, longitude)
                 eightDayWeatherData.value = resp
-                responseStatus.value = resp.init
+                responseStatus.value = ResponseStatus.OK
 
                 Log.d("WeatherViewModel", resp.init)
             } catch (e: Exception) {
-                responseStatus.value = "Failed to load the data: " + e.message
+                responseStatus.value = ResponseStatus.FAILED
                 Log.d("WeatherViewModel", e.stackTraceToString())
             }
         }

@@ -18,7 +18,6 @@ class WeatherFragment : Fragment() {
 
         setObservers()
         binding.sendRequest.setOnClickListener { onSendRequest() }
-
         binding.refreshLayout.setOnRefreshListener { onSendRequest() }
 
         return binding.root
@@ -26,7 +25,6 @@ class WeatherFragment : Fragment() {
 
     private fun onSendRequest() {
         // Default location - London
-        binding.refreshLayout.isRefreshing = true
         viewModel.sendWeatherRequest(
             binding.userLatitude.text.toString().toDouble(),
             binding.userLongitude.text.toString().toDouble()
@@ -43,12 +41,15 @@ class WeatherFragment : Fragment() {
         viewModel.weatherType.observe(viewLifecycleOwner) { type ->
             binding.weatherTypeValue.text = type ?: "none"
         }
-        viewModel.responseStatus.observe(viewLifecycleOwner) { status ->
-            binding.statusValue.text = status
-            // TODO: change responseStatus to enum of possible states
-            if (!status.startsWith("load", ignoreCase = true)) {
-                binding.refreshLayout.isRefreshing = false
+        viewModel.responseStatus.observe(viewLifecycleOwner) { responseStatus ->
+            val (status, isRefreshing) = when(responseStatus!!) {
+                ResponseStatus.LOADING -> "Loading..." to true
+                ResponseStatus.DEFAULT -> "Data is not loaded" to false
+                ResponseStatus.FAILED -> "Failed to load the data" to false
+                ResponseStatus.OK -> "Loaded" to false
             }
+            binding.statusValue.text = status
+            binding.refreshLayout.isRefreshing = isRefreshing
         }
     }
 }
