@@ -46,61 +46,79 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/timepointText"
-            app:layout_constraintTop_toBottomOf="@+id/userLongitude"/>
-    <TextView
-            android:text="Timepoint: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/timepointText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textColor="@android:color/black"
-            android:layout_marginStart="8dp"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/timepointValue"
-            app:layout_constraintStart_toEndOf="@+id/timepointText"
-            app:layout_constraintTop_toTopOf="@+id/timepointText"
-            app:layout_constraintBottom_toBottomOf="@+id/timepointText" android:textColor="@android:color/black"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            tools:text="3"/>
-    <TextView
-            android:text="Temperature: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/temperatureText"
-            app:layout_constraintStart_toStartOf="@+id/timepointText"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textColor="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@+id/timepointText"
-            android:layout_marginTop="8dp"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/temperatureValue"
-            app:layout_constraintStart_toEndOf="@+id/temperatureText"
-            app:layout_constraintTop_toTopOf="@+id/temperatureText"
-            app:layout_constraintBottom_toBottomOf="@+id/temperatureText" android:textColor="@android:color/black"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            tools:text="18"/>
-    <TextView
-            android:text="Weather: "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/weatherTypeText"
-            app:layout_constraintStart_toStartOf="@+id/timepointText"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" android:textColor="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@+id/temperatureText" android:layout_marginTop="8dp"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/weatherTypeValue"
-            app:layout_constraintStart_toEndOf="@+id/weatherTypeText"
-            app:layout_constraintTop_toTopOf="@+id/weatherTypeText"
-            app:layout_constraintBottom_toBottomOf="@+id/weatherTypeText" android:textColor="@android:color/black"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            tools:text="cloudyday"/>
+            app:layout_constraintTop_toBottomOf="@+id/userLongitude" android:layout_marginTop="8dp"/>
     <Button
             android:text="Request"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/sendRequest"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toBottomOf="@+id/weatherTypeText"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"/>
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/statusValue"
+            android:layout_marginTop="8dp" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/refreshLayout">
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/statusValue" android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    <TextView
+                            android:text="Timepoint: "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/timepointText"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/timepointValue"
+                            android:textColor="@android:color/black"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            tools:text="3"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    <TextView
+                            android:text="Temperature: "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/temperatureText"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/temperatureValue"
+                            android:textColor="@android:color/black"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            tools:text="18"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                    <TextView
+                            android:text="Weather: "
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/weatherTypeText"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black"/>
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/weatherTypeValue"
+                            android:textColor="@android:color/black"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            tools:text="cloudyday"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
