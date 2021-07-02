@@ -7,10 +7,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vlprojects.weather.network.SevenTimerWeatherApi
 import com.vlprojects.weather.network.SevenTimerWeatherData
+import com.vlprojects.weather.network.SevenTimerWeatherResponse
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.math.ceil
 
 class WeatherViewModel : ViewModel() {
-    private val weatherData = MutableLiveData<SevenTimerWeatherData?>(null)
+    private val eightDayWeatherData = MutableLiveData<SevenTimerWeatherResponse?>(null)
+    private val weatherData = Transformations.map(eightDayWeatherData) {
+        val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
+        val index = currentHour / 3
+        it?.dataSeries?.get(index)
+    }
     val timepointHour = Transformations.map(weatherData) { it?.timepointHour }
     val temperature = Transformations.map(weatherData) { it?.temp }
     val weatherType = Transformations.map(weatherData) { it?.weatherType }
@@ -23,8 +31,7 @@ class WeatherViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val resp = SevenTimerWeatherApi.service.getCivilWeather(latitude, longitude)
-
-                weatherData.value = resp.dataSeries[0]
+                eightDayWeatherData.value = resp
                 responseStatus.value = resp.init
 
                 Log.d("WeatherViewModel", resp.init)

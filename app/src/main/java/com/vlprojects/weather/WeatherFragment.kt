@@ -23,8 +23,11 @@ class WeatherFragment : Fragment() {
     }
 
     private fun onSendRequest() {
-        // Stein bei Nurnberg's location
-        viewModel.sendWeatherRequest(49.4167, 11.0167)
+        // Default location - London
+        viewModel.sendWeatherRequest(
+            binding.userLatitude.text.toString().toDouble(),
+            binding.userLongitude.text.toString().toDouble()
+        )
     }
 
     private fun setObservers() {
