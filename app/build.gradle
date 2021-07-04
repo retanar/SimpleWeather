@@ -53,6 +53,10 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:1.12.0"
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
 
+    // Jackson CSV
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-csv:$jackson_version"
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:$jackson_version"
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
