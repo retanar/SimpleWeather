@@ -20,7 +20,6 @@ object CityRepository {
                 .with(CsvSchema.emptySchema().withHeader())
                 .readValues<City>(reader)
                 .readAll()
-                .toList()
         }
     }
 

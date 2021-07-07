@@ -6,11 +6,9 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vlprojects.weather.network.SevenTimerWeatherApi
-import com.vlprojects.weather.network.SevenTimerWeatherData
 import com.vlprojects.weather.network.SevenTimerWeatherResponse
 import kotlinx.coroutines.launch
-import java.util.*
-import kotlin.math.ceil
+import java.util.Calendar
 
 class WeatherViewModel : ViewModel() {
     private val eightDayWeatherData = MutableLiveData<SevenTimerWeatherResponse?>(null)
