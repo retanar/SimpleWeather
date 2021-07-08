@@ -1,12 +1,13 @@
-package com.vlprojects.weather
+package com.vlprojects.weather.ui.weather
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.*
-import com.vlprojects.weather.city.City
-import com.vlprojects.weather.city.view.SearchCityFragment
+import com.vlprojects.weather.R
+import com.vlprojects.weather.data.City
+import com.vlprojects.weather.ui.citysearch.SearchCityFragment
 import com.vlprojects.weather.databinding.WeatherFragmentBinding
 
 class WeatherFragment : Fragment() {

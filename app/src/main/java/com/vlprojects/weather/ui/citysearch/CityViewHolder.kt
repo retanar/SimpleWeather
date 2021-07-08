@@ -1,10 +1,10 @@
-package com.vlprojects.weather.city.view
+package com.vlprojects.weather.ui.citysearch
 
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.vlprojects.weather.R
-import com.vlprojects.weather.city.City
+import com.vlprojects.weather.data.City
 
 class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val cityName: TextView = itemView.findViewById(R.id.cityName)

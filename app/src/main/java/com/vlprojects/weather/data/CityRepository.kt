@@ -1,4 +1,4 @@
-package com.vlprojects.weather.city
+package com.vlprojects.weather.data
 
 import android.content.Context
 import com.fasterxml.jackson.dataformat.csv.CsvMapper
@@ -10,7 +10,7 @@ object CityRepository {
     private lateinit var cities: List<City>
 
     fun loadDataset(context: Context) {
-        if (::cities.isInitialized) return
+        if (CityRepository::cities.isInitialized) return
 
         val csvMapper = CsvMapper().apply { registerModule(KotlinModule()) }
 

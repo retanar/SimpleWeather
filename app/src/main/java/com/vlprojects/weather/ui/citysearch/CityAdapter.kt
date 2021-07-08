@@ -1,10 +1,10 @@
-package com.vlprojects.weather.city.view
+package com.vlprojects.weather.ui.citysearch
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vlprojects.weather.R
-import com.vlprojects.weather.city.City
+import com.vlprojects.weather.data.City
 
 class CityAdapter(private val onClickListener: CityClickListener) : RecyclerView.Adapter<CityViewHolder>() {
 

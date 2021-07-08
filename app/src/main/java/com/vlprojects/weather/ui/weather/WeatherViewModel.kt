@@ -1,4 +1,4 @@
-package com.vlprojects.weather
+package com.vlprojects.weather.ui.weather
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

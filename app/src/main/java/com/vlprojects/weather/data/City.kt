@@ -1,4 +1,4 @@
-package com.vlprojects.weather.city
+package com.vlprojects.weather.data
 
 import android.os.Parcelable
 import com.fasterxml.jackson.annotation.JsonProperty

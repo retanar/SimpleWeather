@@ -1,4 +1,4 @@
-package com.vlprojects.weather.city.view
+package com.vlprojects.weather.ui.citysearch
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.lifecycleScope
-import com.vlprojects.weather.city.CityRepository
+import com.vlprojects.weather.data.CityRepository
 import com.vlprojects.weather.databinding.SearchCityFragmentBinding
 import kotlinx.coroutines.launch
 
