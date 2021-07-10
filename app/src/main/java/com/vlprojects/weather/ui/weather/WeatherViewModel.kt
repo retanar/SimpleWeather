@@ -1,16 +1,25 @@
 package com.vlprojects.weather.ui.weather
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vlprojects.weather.data.City
+import com.vlprojects.weather.data.CityPreferenceRepository
+import com.vlprojects.weather.data.CityRepository
 import com.vlprojects.weather.network.SevenTimerWeatherApi
 import com.vlprojects.weather.network.SevenTimerWeatherResponse
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
-class WeatherViewModel : ViewModel() {
+class WeatherViewModel(
+    private val cityPrefRepository: CityPreferenceRepository,
+    context: Context
+) : ViewModel() {
+
     private val eightDayWeatherData = MutableLiveData<SevenTimerWeatherResponse?>(null)
     private val weatherData = Transformations.map(eightDayWeatherData) {
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
@@ -22,6 +31,17 @@ class WeatherViewModel : ViewModel() {
     val weatherType = Transformations.map(weatherData) { it?.weatherType }
 
     val responseStatus = MutableLiveData(ResponseStatus.DEFAULT)
+
+    val city = MutableLiveData<City>()
+
+    init {
+        viewModelScope.launch {
+            cityPrefRepository.cityPreference.collect { cityPref ->
+                val city = CityRepository.binarySearch(context, cityPref.id)
+                this@WeatherViewModel.city.value = city
+            }
+        }
+    }
 
     fun sendWeatherRequest(latitude: Double, longitude: Double) {
         responseStatus.value = ResponseStatus.LOADING
@@ -36,6 +56,14 @@ class WeatherViewModel : ViewModel() {
             } catch (e: Exception) {
                 responseStatus.value = ResponseStatus.FAILED
                 Log.d("WeatherViewModel", e.stackTraceToString())
+            }
+        }
+    }
+
+    fun saveCity(newCity: City? = city.value) {
+        newCity?.let {
+            viewModelScope.launch {
+                cityPrefRepository.updateCityId(newCity.id)
             }
         }
     }

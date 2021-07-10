@@ -23,19 +23,18 @@ object CityRepository {
         }
     }
 
-    suspend fun search(context: Context, partialName: String): List<City> {
+    fun search(context: Context, partialName: String): List<City> {
         loadDataset(context)
 
         return cities.filter { city ->
-            city.name.contains(partialName, ignoreCase = true) ||
-                    city.nameASCII.contains(partialName, ignoreCase = true)
+            city.name.contains(partialName, ignoreCase = true)
         }
     }
 
-    suspend fun binarySearch(context: Context, fullName: String): City {
+    fun binarySearch(context: Context, cityId: Int): City {
         loadDataset(context)
 
-        val index = cities.binarySearch { city -> city.name.compareTo(fullName) }
+        val index = cities.binarySearch { city -> city.id.compareTo(cityId) }
         return cities[index]
     }
 }

@@ -10,6 +10,7 @@ import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 private const val SEVEN_TIMER_URL = "http://www.7timer.info/bin/"
+private const val CONNECTION_TIMEOUT = 60L
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -17,8 +18,8 @@ private val moshi = Moshi.Builder()
 
 // http client needed for custom timeout
 private val httpClient = OkHttpClient.Builder()
-    .connectTimeout(30, TimeUnit.SECONDS)
-    .readTimeout(30, TimeUnit.SECONDS)
+    .connectTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
+    .readTimeout(CONNECTION_TIMEOUT, TimeUnit.SECONDS)
     .build()
 
 private val retrofit = Retrofit.Builder()

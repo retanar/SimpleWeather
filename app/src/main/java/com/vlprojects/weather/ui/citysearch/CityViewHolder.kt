@@ -10,7 +10,7 @@ class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val cityName: TextView = itemView.findViewById(R.id.cityName)
 
     fun bind(item: City, onClickListener: CityClickListener) {
-        cityName.text = "${item.nameASCII}, ${item.country}"
+        cityName.text = "${item.name}, ${item.country}"
         itemView.setOnClickListener { onClickListener.onClick(item) }
     }
 }

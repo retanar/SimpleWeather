@@ -44,8 +44,9 @@
                         android:id="@+id/userLatitude"
                         app:layout_constraintStart_toEndOf="@+id/latitudeText"
                         app:layout_constraintBaseline_toBaselineOf="@id/latitudeText"
-                        android:layout_marginStart="4dp" android:text="51.5072" android:textColor="@android:color/black"
-                        android:singleLine="true"/>
+                        android:layout_marginStart="4dp"
+                        tools:text="51.5072" android:textColor="@android:color/black"
+                        android:singleLine="true" android:editable="false"/>
                 <TextView
                         android:text="Longitude:"
                         android:layout_width="wrap_content"
@@ -63,7 +64,7 @@
                         app:layout_constraintBaseline_toBaselineOf="@+id/longitudeText"
                         app:layout_constraintStart_toEndOf="@+id/longitudeText"
                         android:layout_marginStart="4dp"
-                        android:text="-0.1275"
+                        tools:text="-0.1275"
                         android:textColor="@android:color/black" android:singleLine="true"/>
                 <TextView
                         android:text="Data is not loaded"

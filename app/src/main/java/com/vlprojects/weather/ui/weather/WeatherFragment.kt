@@ -1,19 +1,27 @@
 package com.vlprojects.weather.ui.weather
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.*
 import com.vlprojects.weather.R
 import com.vlprojects.weather.data.City
-import com.vlprojects.weather.ui.citysearch.SearchCityFragment
+import com.vlprojects.weather.data.CityPreferenceRepository
 import com.vlprojects.weather.databinding.WeatherFragmentBinding
+import com.vlprojects.weather.ui.citysearch.SearchCityFragment
+
+const val CITY_PREFERENCES_NAME = "city_preference"
 
 class WeatherFragment : Fragment() {
 
-    private val viewModel: WeatherViewModel by viewModels()
     private lateinit var binding: WeatherFragmentBinding
+    private val Context.dataStore by preferencesDataStore(CITY_PREFERENCES_NAME)
+    private val viewModel: WeatherViewModel by viewModels {
+        WeatherViewModelFactory(CityPreferenceRepository(requireContext().dataStore), requireContext())
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedState: Bundle?): View {
         binding = WeatherFragmentBinding.inflate(inflater, container, false)
@@ -29,13 +37,14 @@ class WeatherFragment : Fragment() {
         }
         binding.refreshLayout.setOnRefreshListener { onSendRequest() }
 
+        // TODO: change hardcoded keys to const values
         setFragmentResultListener("requestCity", ::resultListener)
 
         return binding.root
     }
 
     private fun onSendRequest() {
-        // Default location - London
+        // TODO: Change to use viewModel.city
         viewModel.sendWeatherRequest(
             binding.userLatitude.text.toString().toDouble(),
             binding.userLongitude.text.toString().toDouble()
@@ -62,12 +71,17 @@ class WeatherFragment : Fragment() {
             binding.statusValue.text = status
             binding.refreshLayout.isRefreshing = isRefreshing
         }
+        viewModel.city.observe(viewLifecycleOwner) { city ->
+            binding.cityName.text = city.name
+            binding.userLatitude.setText(city.lat.toString())
+            binding.userLongitude.setText(city.lon.toString())
+            onSendRequest()
+        }
     }
 
     private fun resultListener(requestKey: String, bundle: Bundle) {
         val result = bundle.get("chosenCity") as City
-        binding.userLatitude.setText(result.lat.toString())
-        binding.userLongitude.setText(result.lon.toString())
-        binding.cityName.text = result.nameASCII
+        viewModel.city.value = result
+        viewModel.saveCity(result)
     }
 }

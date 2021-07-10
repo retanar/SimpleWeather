@@ -22,8 +22,7 @@ class SearchCityFragment : Fragment() {
         binding = SearchCityFragmentBinding.inflate(inflater, container, false)
 
         val cityAdapter = CityAdapter { city ->
-            Toast.makeText(context, city.nameASCII, Toast.LENGTH_SHORT).show()
-            setFragmentResult("requestCity", bundleOf("chosenCity" to city as Any))
+            setFragmentResult("requestCity", bundleOf("chosenCity" to city))
             parentFragmentManager.popBackStack()
         }
         binding.citiesRecyclerView.adapter = cityAdapter

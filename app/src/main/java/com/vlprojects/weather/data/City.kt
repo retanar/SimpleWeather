@@ -8,11 +8,11 @@ import kotlinx.parcelize.Parcelize
 data class City(
     @JsonProperty("city")
     val name: String,
-    @JsonProperty("city_ascii")
-    val nameASCII: String,
+    val description: String,
     val lat: Double,
     val lon: Double,
     val country: String,
     @JsonProperty("iso2")
     val isoCode: String,
+    val id: Int,
 ) : Parcelable
