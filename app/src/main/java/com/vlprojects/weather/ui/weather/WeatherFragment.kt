@@ -62,10 +62,10 @@ class WeatherFragment : Fragment() {
         }
         viewModel.responseStatus.observe(viewLifecycleOwner) { responseStatus ->
             val (status, isRefreshing) = when (responseStatus!!) {
-                ResponseStatus.LOADING -> "Loading..." to true
-                ResponseStatus.DEFAULT -> "Data is not loaded" to false
-                ResponseStatus.FAILED -> "Failed to load the data" to false
-                ResponseStatus.OK -> "Loaded" to false
+                ResponseStatus.LOADING -> resources.getString(R.string.loading) to true
+                ResponseStatus.DEFAULT -> resources.getString(R.string.data_not_loaded) to false
+                ResponseStatus.FAILED -> resources.getString(R.string.failed_to_load_data) to false
+                ResponseStatus.OK -> resources.getString(R.string.data_not_loaded) to false
             }
             binding.statusValue.text = status
             binding.refreshLayout.isRefreshing = isRefreshing

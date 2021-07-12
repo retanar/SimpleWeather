@@ -26,9 +26,9 @@
                         app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp" android:layout_marginTop="8dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        tools:text="City" android:text="Unknown"/>
+                        tools:text="City" android:text="@string/unknown"/>
                 <TextView
-                        android:text="Latitude:"
+                        android:text="@string/latitude_colon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/latitudeText"
                         app:layout_constraintTop_toBottomOf="@+id/cityName"
@@ -46,15 +46,16 @@
                         android:layout_marginStart="4dp"
                         tools:text="51.5072" android:textColor="@android:color/black"
                         android:singleLine="true" android:focusable="false"
-                        android:cursorVisible="false" android:enabled="false"/>
+                        android:cursorVisible="false" android:enabled="false"
+                        android:importantForAutofill="no" tools:ignore="LabelFor"/>
                 <TextView
-                        android:text="Longitude:"
+                        android:text="@string/longitude_colon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/longitudeText"
                         app:layout_constraintStart_toStartOf="@+id/latitudeText"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black"
-                        app:layout_constraintTop_toBottomOf="@+id/latitudeText" android:layout_marginTop="32dp"/>
+                        app:layout_constraintTop_toBottomOf="@+id/latitudeText" android:layout_marginTop="16dp"/>
                 <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -66,9 +67,10 @@
                         tools:text="-0.1275"
                         android:textColor="@android:color/black" android:singleLine="true"
                         android:focusable="false"
-                        android:cursorVisible="false" android:enabled="false"/>
+                        android:cursorVisible="false" android:enabled="false"
+                        android:importantForAutofill="no" tools:ignore="LabelFor"/>
                 <TextView
-                        android:text="Data is not loaded"
+                        tools:text="Data is not loaded"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/statusValue"
                         android:textColor="@android:color/black"
@@ -84,7 +86,7 @@
                         app:layout_constraintStart_toStartOf="parent" android:id="@+id/timepointLayout"
                         android:layout_marginStart="8dp" android:layout_marginTop="8dp">
                     <TextView
-                            android:text="Timepoint: "
+                            android:text="@string/timepoint_colon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/timepointText"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -94,6 +96,8 @@
                             android:layout_height="wrap_content" android:id="@+id/timepointValue"
                             android:textColor="@android:color/black"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="4dp"
                             tools:text="3"/>
                 </LinearLayout>
                 <LinearLayout
@@ -105,7 +109,7 @@
                         app:layout_constraintStart_toStartOf="@+id/timepointLayout"
                         app:layout_constraintTop_toBottomOf="@+id/timepointLayout">
                     <TextView
-                            android:text="Temperature: "
+                            android:text="@string/temperature_colon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/temperatureText"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -115,6 +119,8 @@
                             android:layout_height="wrap_content" android:id="@+id/temperatureValue"
                             android:textColor="@android:color/black"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="4dp"
                             tools:text="18"/>
                 </LinearLayout>
                 <LinearLayout
@@ -126,7 +132,7 @@
                         app:layout_constraintStart_toStartOf="@+id/timepointLayout"
                         app:layout_constraintTop_toBottomOf="@+id/temperatureLayout">
                     <TextView
-                            android:text="Weather: "
+                            android:text="@string/weather_colon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/weatherTypeText"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -136,6 +142,8 @@
                             android:layout_height="wrap_content" android:id="@+id/weatherTypeValue"
                             android:textColor="@android:color/black"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="4dp"
                             tools:text="cloudyday"/>
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -143,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp" android:layout_weight="1"/>
             <Button
-                    android:text="Request"
+                    android:text="@string/request"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/sendRequest"
                     android:layout_marginBottom="8dp" android:layout_gravity="bottom|center_horizontal"/>

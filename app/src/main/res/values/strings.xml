@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="unknown">Unknown</string>
+    <string name="latitude_colon">Latitude:</string>
+    <string name="longitude_colon">Longitude:</string>
+    <string name="timepoint_colon">Timepoint:</string>
+    <string name="temperature_colon">Temperature:</string>
+    <string name="weather_colon">Weather:</string>
+    <string name="request">Request</string>
+    <string name="enter_city_name_hint">Enter city name</string>
+
+    <!-- Response statuses -->
+    <string name="data_not_loaded">Data is not loaded</string>
+    <string name="loading">Loading…</string>
+    <string name="loaded">Loaded</string>
+    <string name="failed_to_load_data">Failed to load the data</string>
 </resources>
