@@ -40,13 +40,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:ems="10"
                         android:id="@+id/userLatitude"
                         app:layout_constraintStart_toEndOf="@+id/latitudeText"
                         app:layout_constraintBaseline_toBaselineOf="@id/latitudeText"
                         android:layout_marginStart="4dp"
                         tools:text="51.5072" android:textColor="@android:color/black"
-                        android:singleLine="true" android:editable="false"/>
+                        android:singleLine="true" android:focusable="false"
+                        android:cursorVisible="false" android:enabled="false"/>
                 <TextView
                         android:text="Longitude:"
                         android:layout_width="wrap_content"
@@ -59,13 +59,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:ems="10"
                         android:id="@+id/userLongitude"
                         app:layout_constraintBaseline_toBaselineOf="@+id/longitudeText"
                         app:layout_constraintStart_toEndOf="@+id/longitudeText"
                         android:layout_marginStart="4dp"
                         tools:text="-0.1275"
-                        android:textColor="@android:color/black" android:singleLine="true"/>
+                        android:textColor="@android:color/black" android:singleLine="true"
+                        android:focusable="false"
+                        android:cursorVisible="false" android:enabled="false"/>
                 <TextView
                         android:text="Data is not loaded"
                         android:layout_width="wrap_content"

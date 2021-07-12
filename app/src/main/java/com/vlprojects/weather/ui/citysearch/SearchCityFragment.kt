@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -13,6 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import com.vlprojects.weather.data.CityRepository
 import com.vlprojects.weather.databinding.SearchCityFragmentBinding
 import kotlinx.coroutines.launch
+
+const val CITY_REQUEST_KEY = "requestCity"
+const val CITY_BUNDLE_KEY = "chosenCity"
 
 class SearchCityFragment : Fragment() {
 
@@ -22,7 +24,7 @@ class SearchCityFragment : Fragment() {
         binding = SearchCityFragmentBinding.inflate(inflater, container, false)
 
         val cityAdapter = CityAdapter { city ->
-            setFragmentResult("requestCity", bundleOf("chosenCity" to city))
+            setFragmentResult(CITY_REQUEST_KEY, bundleOf(CITY_BUNDLE_KEY to city))
             parentFragmentManager.popBackStack()
         }
         binding.citiesRecyclerView.adapter = cityAdapter

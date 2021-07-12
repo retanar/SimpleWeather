@@ -11,6 +11,8 @@ import com.vlprojects.weather.R
 import com.vlprojects.weather.data.City
 import com.vlprojects.weather.data.CityPreferenceRepository
 import com.vlprojects.weather.databinding.WeatherFragmentBinding
+import com.vlprojects.weather.ui.citysearch.CITY_BUNDLE_KEY
+import com.vlprojects.weather.ui.citysearch.CITY_REQUEST_KEY
 import com.vlprojects.weather.ui.citysearch.SearchCityFragment
 
 const val CITY_PREFERENCES_NAME = "city_preference"
@@ -37,18 +39,15 @@ class WeatherFragment : Fragment() {
         }
         binding.refreshLayout.setOnRefreshListener { onSendRequest() }
 
-        // TODO: change hardcoded keys to const values
-        setFragmentResultListener("requestCity", ::resultListener)
+        setFragmentResultListener(CITY_REQUEST_KEY, ::resultListener)
 
         return binding.root
     }
 
     private fun onSendRequest() {
-        // TODO: Change to use viewModel.city
-        viewModel.sendWeatherRequest(
-            binding.userLatitude.text.toString().toDouble(),
-            binding.userLongitude.text.toString().toDouble()
-        )
+        viewModel.city.value?.let { city ->
+            viewModel.sendWeatherRequest(city.lat, city.lon)
+        }
     }
 
     private fun setObservers() {
@@ -80,7 +79,7 @@ class WeatherFragment : Fragment() {
     }
 
     private fun resultListener(requestKey: String, bundle: Bundle) {
-        val result = bundle.get("chosenCity") as City
+        val result = bundle.get(CITY_BUNDLE_KEY) as City
         viewModel.city.value = result
         viewModel.saveCity(result)
     }
