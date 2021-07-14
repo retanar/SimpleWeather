@@ -33,7 +33,7 @@
                         android:layout_height="wrap_content" android:id="@+id/latitudeText"
                         app:layout_constraintTop_toBottomOf="@+id/cityName"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="8dp" android:layout_marginTop="24dp"
+                        android:layout_marginStart="8dp" android:layout_marginTop="16dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black"/>
                 <EditText
@@ -78,19 +78,26 @@
                         app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/userLongitude" android:layout_marginTop="8dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:id="@+id/weatherRecyclerView" app:layout_constraintTop_toBottomOf="@+id/statusValue"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"/>
                 <LinearLayout
                         android:orientation="horizontal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/statusValue"
                         app:layout_constraintStart_toStartOf="parent" android:id="@+id/timepointLayout"
-                        android:layout_marginStart="8dp" android:layout_marginTop="8dp">
+                        android:layout_marginStart="8dp" android:layout_marginTop="8dp" android:visibility="gone">
                     <TextView
                             android:text="@string/timepoint_colon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/timepointText"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="@android:color/black"/>
+                            android:textColor="@android:color/black" android:visibility="gone"/>
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/timepointValue"
@@ -98,7 +105,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:paddingStart="4dp"
                             android:paddingEnd="4dp"
-                            tools:text="3"/>
+                            tools:text="3" android:visibility="gone"/>
                 </LinearLayout>
                 <LinearLayout
                         android:orientation="horizontal"
@@ -107,13 +114,13 @@
                         android:id="@+id/temperatureLayout"
                         android:layout_marginTop="8dp"
                         app:layout_constraintStart_toStartOf="@+id/timepointLayout"
-                        app:layout_constraintTop_toBottomOf="@+id/timepointLayout">
+                        app:layout_constraintTop_toBottomOf="@+id/timepointLayout" android:visibility="gone">
                     <TextView
                             android:text="@string/temperature_colon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/temperatureText"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textColor="@android:color/black"/>
+                            android:textColor="@android:color/black" android:visibility="gone"/>
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/temperatureValue"
@@ -121,7 +128,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:paddingStart="4dp"
                             android:paddingEnd="4dp"
-                            tools:text="18"/>
+                            tools:text="18" android:visibility="gone"/>
                 </LinearLayout>
                 <LinearLayout
                         android:orientation="horizontal"
@@ -130,7 +137,7 @@
                         android:id="@+id/weatherTypeLayout"
                         android:layout_marginTop="8dp"
                         app:layout_constraintStart_toStartOf="@+id/timepointLayout"
-                        app:layout_constraintTop_toBottomOf="@+id/temperatureLayout">
+                        app:layout_constraintTop_toBottomOf="@+id/temperatureLayout" android:visibility="gone">
                     <TextView
                             android:text="@string/weather_colon"
                             android:layout_width="wrap_content"

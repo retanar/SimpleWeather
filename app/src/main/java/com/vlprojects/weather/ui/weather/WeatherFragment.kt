@@ -24,6 +24,7 @@ class WeatherFragment : Fragment() {
     private val viewModel: WeatherViewModel by viewModels {
         WeatherViewModelFactory(CityPreferenceRepository(requireContext().dataStore), requireContext())
     }
+    private val weatherAdapter = WeatherAdapter()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedState: Bundle?): View {
         binding = WeatherFragmentBinding.inflate(inflater, container, false)
@@ -38,6 +39,8 @@ class WeatherFragment : Fragment() {
             }
         }
         binding.refreshLayout.setOnRefreshListener { onSendRequest() }
+
+        binding.weatherRecyclerView.adapter = weatherAdapter
 
         setFragmentResultListener(CITY_REQUEST_KEY, ::resultListener)
 
@@ -60,6 +63,13 @@ class WeatherFragment : Fragment() {
         viewModel.weatherType.observe(viewLifecycleOwner) { type ->
             binding.weatherTypeValue.text = type ?: "none"
         }
+
+        viewModel.weatherDataList.observe(viewLifecycleOwner) { list ->
+            list?.let {
+                weatherAdapter.weatherList = it
+            }
+        }
+
         viewModel.responseStatus.observe(viewLifecycleOwner) { responseStatus ->
             val (status, isRefreshing) = when (responseStatus!!) {
                 ResponseStatus.LOADING -> resources.getString(R.string.loading) to true

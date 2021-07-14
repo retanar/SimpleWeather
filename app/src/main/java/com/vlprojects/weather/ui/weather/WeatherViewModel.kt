@@ -2,14 +2,12 @@ package com.vlprojects.weather.ui.weather
 
 import android.content.Context
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.vlprojects.weather.data.City
 import com.vlprojects.weather.data.CityPreferenceRepository
 import com.vlprojects.weather.data.CityRepository
 import com.vlprojects.weather.network.SevenTimerWeatherApi
+import com.vlprojects.weather.network.SevenTimerWeatherData
 import com.vlprojects.weather.network.SevenTimerWeatherResponse
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -21,6 +19,11 @@ class WeatherViewModel(
 ) : ViewModel() {
 
     private val eightDayWeatherData = MutableLiveData<SevenTimerWeatherResponse?>(null)
+    val weatherDataList: LiveData<List<SevenTimerWeatherData>?>
+        get() = Transformations.map(eightDayWeatherData) {
+            it?.dataSeries?.take(8)
+        }
+
     private val weatherData = Transformations.map(eightDayWeatherData) {
         val currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY)
         val index = currentHour / 3
