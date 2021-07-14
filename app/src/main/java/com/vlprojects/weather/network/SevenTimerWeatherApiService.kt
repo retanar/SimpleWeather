@@ -9,7 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
-private const val SEVEN_TIMER_URL = "http://www.7timer.info/bin/"
+private const val SEVEN_TIMER_URL = "https://www.7timer.info/bin/"
 private const val CONNECTION_TIMEOUT = 60L
 
 private val moshi = Moshi.Builder()

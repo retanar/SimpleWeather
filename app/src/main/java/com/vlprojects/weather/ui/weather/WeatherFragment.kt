@@ -54,16 +54,6 @@ class WeatherFragment : Fragment() {
     }
 
     private fun setObservers() {
-        viewModel.timepointHour.observe(viewLifecycleOwner) { timepoint ->
-            binding.timepointValue.text = timepoint?.toString() ?: "none"
-        }
-        viewModel.temperature.observe(viewLifecycleOwner) { temp ->
-            binding.temperatureValue.text = temp?.toString() ?: "none"
-        }
-        viewModel.weatherType.observe(viewLifecycleOwner) { type ->
-            binding.weatherTypeValue.text = type ?: "none"
-        }
-
         viewModel.weatherDataList.observe(viewLifecycleOwner) { list ->
             list?.let {
                 weatherAdapter.weatherList = it
@@ -75,7 +65,7 @@ class WeatherFragment : Fragment() {
                 ResponseStatus.LOADING -> resources.getString(R.string.loading) to true
                 ResponseStatus.DEFAULT -> resources.getString(R.string.data_not_loaded) to false
                 ResponseStatus.FAILED -> resources.getString(R.string.failed_to_load_data) to false
-                ResponseStatus.OK -> resources.getString(R.string.data_not_loaded) to false
+                ResponseStatus.OK -> resources.getString(R.string.loaded) to false
             }
             binding.statusValue.text = status
             binding.refreshLayout.isRefreshing = isRefreshing
