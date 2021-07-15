@@ -12,8 +12,8 @@ class WeatherViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val weatherType: TextView = view.findViewById(R.id.weatherTypeValue)
 
     fun bind(weatherData: SevenTimerWeatherData) {
-        timepoint.text = weatherData.timepointHour.toString()
-        temperature.text = weatherData.temp.toString()
+        timepoint.text = "${weatherData.timepointHour}:00"
+        temperature.text = "${weatherData.temp}°C"
         weatherType.text = weatherData.weatherType
     }
 }
