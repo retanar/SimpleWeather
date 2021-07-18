@@ -32,7 +32,7 @@ class SearchCityFragment : Fragment() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(input: String?): Boolean {
                 lifecycleScope.launch {
-                    cityAdapter.cityList = CityRepository.search(context!!, input ?: "")
+                    cityAdapter.cityList = CityRepository.getInstance(requireContext()).search(input ?: "")
                 }
 
                 return true

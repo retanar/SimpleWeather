@@ -30,7 +30,7 @@ class WeatherViewModel(
     init {
         viewModelScope.launch {
             cityPrefRepository.cityPreference.collect { cityPref ->
-                val city = CityRepository.binarySearch(context, cityPref.id)
+                val city = CityRepository.getInstance(context).binarySearch(cityPref.id)
                 this@WeatherViewModel.city.value = city
             }
         }
