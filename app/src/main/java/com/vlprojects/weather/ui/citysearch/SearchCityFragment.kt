@@ -8,10 +8,8 @@ import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
-import androidx.lifecycle.lifecycleScope
-import com.vlprojects.weather.data.CityRepository
+import androidx.fragment.app.viewModels
 import com.vlprojects.weather.databinding.SearchCityFragmentBinding
-import kotlinx.coroutines.launch
 
 const val CITY_REQUEST_KEY = "requestCity"
 const val CITY_BUNDLE_KEY = "chosenCity"
@@ -19,6 +17,7 @@ const val CITY_BUNDLE_KEY = "chosenCity"
 class SearchCityFragment : Fragment() {
 
     lateinit var binding: SearchCityFragmentBinding
+    val viewModel: SearchCityViewModel by viewModels { SearchCityViewModelFactory(requireContext()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = SearchCityFragmentBinding.inflate(inflater, container, false)
@@ -31,9 +30,7 @@ class SearchCityFragment : Fragment() {
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(input: String?): Boolean {
-                lifecycleScope.launch {
-                    cityAdapter.cityList = CityRepository.getInstance(requireContext()).search(input ?: "")
-                }
+                cityAdapter.cityList = viewModel.searchCity(input)
 
                 return true
             }
