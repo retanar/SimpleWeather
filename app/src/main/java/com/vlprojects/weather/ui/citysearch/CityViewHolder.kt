@@ -8,9 +8,13 @@ import com.vlprojects.weather.data.City
 
 class CityViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val cityName: TextView = itemView.findViewById(R.id.cityName)
+    val country: TextView = itemView.findViewById(R.id.country)
+    val description: TextView = itemView.findViewById(R.id.description)
 
-    fun bind(item: City, onClickListener: CityClickListener) {
-        cityName.text = "${item.name}, ${item.country}"
-        itemView.setOnClickListener { onClickListener.onClick(item) }
+    fun bind(city: City, onClickListener: CityClickListener) {
+        cityName.text = city.name
+        country.text = city.country
+        description.text = city.description
+        itemView.setOnClickListener { onClickListener.onClick(city) }
     }
 }

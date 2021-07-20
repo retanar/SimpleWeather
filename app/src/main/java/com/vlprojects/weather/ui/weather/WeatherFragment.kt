@@ -31,13 +31,7 @@ class WeatherFragment : Fragment() {
 
         setObservers()
         binding.sendRequest.setOnClickListener { onSendRequest() }
-        binding.cityName.setOnClickListener {
-            parentFragmentManager.commit {
-                replace<SearchCityFragment>(R.id.mainFragmentContainer)
-                setReorderingAllowed(true)
-                addToBackStack(null)
-            }
-        }
+        binding.cityName.setOnClickListener { openSearchFragment() }
         binding.refreshLayout.setOnRefreshListener { onSendRequest() }
 
         binding.weatherRecyclerView.adapter = weatherAdapter
@@ -75,6 +69,14 @@ class WeatherFragment : Fragment() {
             binding.userLatitude.setText(city.lat.toString())
             binding.userLongitude.setText(city.lon.toString())
             onSendRequest()
+        }
+    }
+
+    private fun openSearchFragment() {
+        parentFragmentManager.commit {
+            replace<SearchCityFragment>(R.id.mainFragmentContainer)
+            setReorderingAllowed(true)
+            addToBackStack(null)
         }
     }
 
